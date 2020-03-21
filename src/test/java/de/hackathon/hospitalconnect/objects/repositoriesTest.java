@@ -9,6 +9,7 @@ import de.hackathon.hospitalconnect.objects.resources.MaterialResource;
 import de.hackathon.hospitalconnect.objects.resources.PersonalResource;
 import de.hackathon.hospitalconnect.objects.resources.repositories.MaterialResourceRepository;
 import de.hackathon.hospitalconnect.objects.resources.repositories.PersonalResourceRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -53,5 +54,6 @@ public class repositoriesTest {
         hospitalLocationRepository.save(location);
         Hospital savedHospital = hospitalRepository.saveAndFlush(hospital);
 
+        Assertions.assertEquals(hospital, savedHospital);
     }
 }
