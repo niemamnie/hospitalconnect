@@ -1,5 +1,5 @@
 package de.hackathon.hospitalconnect.objects.enums;
 
-public enum NeedStage {
-    GREEN, YELLOW, RED
+public enum UserType {
+    PRIVATE_PERSON, HOSPITAL
 }

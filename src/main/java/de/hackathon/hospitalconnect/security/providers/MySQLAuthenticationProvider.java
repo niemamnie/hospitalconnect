@@ -1,7 +1,7 @@
 package de.hackathon.hospitalconnect.security.providers;
 
-import de.hackathon.hospitalconnect.objects.user.User;
-import de.hackathon.hospitalconnect.objects.user.repositories.UserRepository;
+import de.hackathon.hospitalconnect.objects.hospitals.User;
+import de.hackathon.hospitalconnect.objects.hospitals.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +26,7 @@ public class MySQLAuthenticationProvider implements AuthenticationProvider {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        Optional<User> foundUser = userRepository.getByEmailAndPassword(email, password);
+        Optional<User> foundUser = userRepository.getByCredentials_EmailAndCredentials_Password(email, password);
         if (foundUser.isPresent()) {
             List<GrantedAuthority> authorityList = new ArrayList<>();
             authorityList.add(new SimpleGrantedAuthority("USER"));

@@ -1,4 +1,4 @@
-package de.hackathon.hospitalconnect.rest.auth.exception;
+package de.hackathon.hospitalconnect.rest.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

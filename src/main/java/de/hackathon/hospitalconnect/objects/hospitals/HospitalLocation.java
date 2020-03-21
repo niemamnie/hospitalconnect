@@ -1,38 +1,42 @@
 package de.hackathon.hospitalconnect.objects.hospitals;
 
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "hospital_location")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class HospitalLocation {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false, unique = true)
-    private UUID id;
+    private Long id;
 
     private Double lat;
 
     private Double lng;
 
+    private int PLZ;
+
+    private String city;
+
     @OneToOne
-    private Hospital hospital;
+    @JsonIgnore
+    private User user;
 
     /**
-     * Use {@link Hospital#setLocation(HospitalLocation)}
+     * Use {@link User#setLocation(HospitalLocation)}
      * to assign personal resource
      *
-     * @param hospital
+     * @param user
      */
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
