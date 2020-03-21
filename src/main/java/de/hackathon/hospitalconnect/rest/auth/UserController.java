@@ -1,7 +1,8 @@
 package de.hackathon.hospitalconnect.rest.auth;
 
-import de.hackathon.hospitalconnect.objects.User;
-import de.hackathon.hospitalconnect.objects.repositories.UserRepository;
+import de.hackathon.hospitalconnect.objects.user.User;
+import de.hackathon.hospitalconnect.objects.user.repositories.UserRepository;
+import de.hackathon.hospitalconnect.rest.auth.exception.InternException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,12 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity registerUser(@RequestBody User user) {
-        userRepository.saveAndFlush(user);
-        return new ResponseEntity(HttpStatus.OK);
+        boolean existsUSer = userRepository.existsByEmail(user.getEmail());
+        if (existsUSer) {
+            userRepository.saveAndFlush(user);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            throw new InternException("Cannot use given email address", HttpStatus.CONFLICT);
+        }
     }
 }

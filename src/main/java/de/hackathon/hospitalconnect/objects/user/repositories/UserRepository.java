@@ -1,7 +1,6 @@
-package de.hackathon.hospitalconnect.objects.repositories;
+package de.hackathon.hospitalconnect.objects.user.repositories;
 
-import de.hackathon.hospitalconnect.objects.User;
-import jdk.jfr.Registered;
+import de.hackathon.hospitalconnect.objects.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +12,6 @@ import java.util.UUID;
 @Transactional
 public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> getByEmailAndPassword(String email, String password);
+
+    boolean existsByEmail(String email);
 }
