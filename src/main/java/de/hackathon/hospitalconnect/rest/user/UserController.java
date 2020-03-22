@@ -1,8 +1,8 @@
 package de.hackathon.hospitalconnect.rest.user;
 
-import de.hackathon.hospitalconnect.objects.hospitals.User;
-import de.hackathon.hospitalconnect.objects.hospitals.repositories.HospitalLocationRepository;
-import de.hackathon.hospitalconnect.objects.hospitals.repositories.UserRepository;
+import de.hackathon.hospitalconnect.objects.user.User;
+import de.hackathon.hospitalconnect.objects.user.repositories.AddressRepository;
+import de.hackathon.hospitalconnect.objects.user.repositories.UserRepository;
 import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -15,9 +15,9 @@ import java.util.Optional;
 public class UserController {
 
     private final UserRepository userRepository;
-    private final HospitalLocationRepository locationRepository;
+    private final AddressRepository locationRepository;
 
-    public UserController(UserRepository userRepository, HospitalLocationRepository locationRepository) {
+    public UserController(UserRepository userRepository, AddressRepository locationRepository) {
         this.userRepository = userRepository;
         this.locationRepository = locationRepository;
     }
@@ -40,6 +40,11 @@ public class UserController {
     }
 
     public List<User> getUsers() {
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        for (User userItem : users) {
+            userItem.getPersonal_resources().size();
+            userItem.getMaterial_resources().size();
+        }
+        return users;
     }
 }

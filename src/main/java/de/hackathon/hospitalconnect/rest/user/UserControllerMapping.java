@@ -1,8 +1,7 @@
-package de.hackathon.hospitalconnect.rest.user.mapping;
+package de.hackathon.hospitalconnect.rest.user;
 
 
-import de.hackathon.hospitalconnect.objects.hospitals.User;
-import de.hackathon.hospitalconnect.rest.user.UserController;
+import de.hackathon.hospitalconnect.objects.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Component
-@RequestMapping("/user")
+@RequestMapping
 public class UserControllerMapping {
     private final UserController userController;
 
@@ -19,19 +18,19 @@ public class UserControllerMapping {
         this.userController = userController;
     }
 
-    @GetMapping
+    @GetMapping("get/user")
     public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity(userController.getUsers(), HttpStatus.OK);
     }
 
 
-    @PutMapping
+    @PutMapping("put/user")
     public ResponseEntity saveNewHospital(@RequestBody User user) {
         Long id = userController.saveNewHospital(user);
         return new ResponseEntity("/user/" + id.toString(), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("get/user/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         return new ResponseEntity<>(userController.getUser(id), HttpStatus.OK);
     }

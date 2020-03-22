@@ -1,9 +1,10 @@
 package de.hackathon.hospitalconnect.objects;
 
-import de.hackathon.hospitalconnect.objects.hospitals.HospitalLocation;
-import de.hackathon.hospitalconnect.objects.hospitals.User;
-import de.hackathon.hospitalconnect.objects.hospitals.repositories.HospitalLocationRepository;
-import de.hackathon.hospitalconnect.objects.hospitals.repositories.UserRepository;
+import de.hackathon.hospitalconnect.objects.user.Address;
+import de.hackathon.hospitalconnect.objects.user.Coordinates;
+import de.hackathon.hospitalconnect.objects.user.User;
+import de.hackathon.hospitalconnect.objects.user.repositories.AddressRepository;
+import de.hackathon.hospitalconnect.objects.user.repositories.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,21 @@ public class repositoriesTest {
     UserRepository userRepository;
 
     @Autowired
-    HospitalLocationRepository hospitalLocationRepository;
+    AddressRepository hospitalLocationRepository;
 
 
     @Test
     public void jpaTest() {
         User user = new User();
-        HospitalLocation location = new HospitalLocation();
-        location.setLat(12.22);
-        location.setLng(14.22);
+        Address location = new Address();
+        Coordinates coordinates = new Coordinates();
+        coordinates.setLat(12.22);
+        coordinates.setLng(14.22);
+
+        location.setCoordinates(coordinates);
 
         user.setName("test hospital");
-        user.setLocation(location);
+        user.setAddress(location);
         hospitalLocationRepository.save(location);
         User savedUser = userRepository.saveAndFlush(user);
 

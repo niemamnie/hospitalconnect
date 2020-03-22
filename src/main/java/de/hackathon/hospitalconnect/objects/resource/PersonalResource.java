@@ -2,7 +2,7 @@ package de.hackathon.hospitalconnect.objects.resource;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.hackathon.hospitalconnect.objects.enums.ResourceStatus;
-import de.hackathon.hospitalconnect.objects.hospitals.User;
+import de.hackathon.hospitalconnect.objects.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@Table(name = "personal_resource")
 public class PersonalResource {
 
     @Id
@@ -18,14 +19,14 @@ public class PersonalResource {
     @Column(updatable = false, nullable = false, unique = true)
     private Long id;
 
+    private String name;
+
     @Enumerated(EnumType.ORDINAL)
     private ResourceStatus status;
 
     @ManyToOne
-    private DefaultPersonalResource defaultPersonalResource;
-
-    @ManyToOne
     @JsonIgnore
     private User user;
+
 
 }

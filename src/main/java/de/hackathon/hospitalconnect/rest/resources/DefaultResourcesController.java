@@ -1,9 +1,9 @@
 package de.hackathon.hospitalconnect.rest.resources;
 
 
-import de.hackathon.hospitalconnect.objects.resource.DefaultMaterialResource;
-import de.hackathon.hospitalconnect.objects.resource.DefaultPersonalResource;
 import de.hackathon.hospitalconnect.objects.resource.DefaultResources;
+import de.hackathon.hospitalconnect.objects.resource.MaterialResourceName;
+import de.hackathon.hospitalconnect.objects.resource.PersonalResourceName;
 import de.hackathon.hospitalconnect.objects.resource.repositories.DefaultMaterialResourceRepository;
 import de.hackathon.hospitalconnect.objects.resource.repositories.DefaultPersonalResourceRepository;
 import org.springframework.stereotype.Component;
@@ -28,19 +28,19 @@ public class DefaultResourcesController {
         );
     }
 
-    public void saveDefaultPersonalResource(DefaultPersonalResource defaultPersonalResource) {
-        defaultPersonalResourceRepository.saveAndFlush(defaultPersonalResource);
+    public void saveDefaultPersonalResource(PersonalResourceName personalResourceName) {
+        defaultPersonalResourceRepository.saveAndFlush(personalResourceName);
     }
 
-    public void saveDefaultMaterialResource(DefaultMaterialResource defaultMaterialResource) {
-        defaultMaterialResourceRepository.saveAndFlush(defaultMaterialResource);
+    public void saveDefaultMaterialResource(MaterialResourceName MaterialResourceName) {
+        defaultMaterialResourceRepository.saveAndFlush(MaterialResourceName);
     }
 
-    public DefaultMaterialResource getDefaultMaterialResource(Long id) {
+    public MaterialResourceName getDefaultMaterialResource(Long id) {
         return defaultMaterialResourceRepository.getOne(id);
     }
 
-    public DefaultPersonalResource getDefaultPersonalResource(Long id) {
+    public PersonalResourceName getDefaultPersonalResource(Long id) {
         return defaultPersonalResourceRepository.getOne(id);
     }
 }

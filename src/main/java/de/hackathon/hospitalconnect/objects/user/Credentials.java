@@ -1,4 +1,4 @@
-package de.hackathon.hospitalconnect.objects.hospitals;
+package de.hackathon.hospitalconnect.objects.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Setter
 @Table(name = "credentials")
 public class Credentials {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

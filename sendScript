@@ -1,0 +1,1 @@
+scp -ri robertkey.pem target/  ec2-user@ec2-3-125-42-11.eu-central-1.compute.amazonaws.com:~

@@ -1,6 +1,6 @@
-package de.hackathon.hospitalconnect.objects.hospitals.repositories;
+package de.hackathon.hospitalconnect.objects.user.repositories;
 
-import de.hackathon.hospitalconnect.objects.hospitals.User;
+import de.hackathon.hospitalconnect.objects.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

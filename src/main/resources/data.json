@@ -94,5 +94,27 @@
         "status": "need"
       }
     ]
+  },
+  "": {
+    "id": 1,
+    "type": null,
+    "name": "test Hospital",
+    "verband": null,
+    "credentials": {
+      "id": 2,
+      "email": "email@email.de",
+      "password": "password"
+    },
+    "tel": null,
+    "contact": null,
+    "address": {
+      "id": 3,
+      "postalcode": 0,
+      "city": null,
+      "street": null,
+      "coordinates": null
+    },
+    "personalResources": [],
+    "materialResources": []
   }
 }

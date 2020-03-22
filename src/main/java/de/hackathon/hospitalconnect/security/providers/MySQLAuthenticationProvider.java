@@ -1,7 +1,7 @@
 package de.hackathon.hospitalconnect.security.providers;
 
-import de.hackathon.hospitalconnect.objects.hospitals.User;
-import de.hackathon.hospitalconnect.objects.hospitals.repositories.UserRepository;
+import de.hackathon.hospitalconnect.objects.user.User;
+import de.hackathon.hospitalconnect.objects.user.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
