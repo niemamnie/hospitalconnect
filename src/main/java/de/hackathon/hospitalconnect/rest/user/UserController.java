@@ -1,38 +1,45 @@
 package de.hackathon.hospitalconnect.rest.user;
 
-
 import de.hackathon.hospitalconnect.objects.hospitals.User;
-import de.hackathon.hospitalconnect.rest.user.services.UserService;
+import de.hackathon.hospitalconnect.objects.hospitals.repositories.HospitalLocationRepository;
+import de.hackathon.hospitalconnect.objects.hospitals.repositories.UserRepository;
+import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
-@RequestMapping("/user")
 public class UserController {
-    private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    private final UserRepository userRepository;
+    private final HospitalLocationRepository locationRepository;
+
+    public UserController(UserRepository userRepository, HospitalLocationRepository locationRepository) {
+        this.userRepository = userRepository;
+        this.locationRepository = locationRepository;
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
-        return new ResponseEntity(userService.getUsers(), HttpStatus.OK);
+    public Long saveNewHospital(User user) {
+        User saved = userRepository.saveAndFlush(user);
+        return saved.getId();
     }
 
-
-    @PutMapping
-    public ResponseEntity saveNewHospital(@RequestBody User user) {
-        Long id = userService.saveNewHospital(user);
-        return new ResponseEntity("/user/" + id.toString(), HttpStatus.CREATED);
+    public User getUser(Long id) {
+        try {
+            Optional<User> anyHospital = userRepository.findById(id);
+            if (anyHospital.isPresent()) {
+                return anyHospital.get();
+            }
+        } catch (EntityNotFoundException e) {
+            throw new InternException("Could not Found", HttpStatus.NOT_FOUND);
+        }
+        throw new InternException("Could not Found", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
-        return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 }

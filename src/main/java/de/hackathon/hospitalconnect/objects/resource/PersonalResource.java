@@ -1,5 +1,6 @@
 package de.hackathon.hospitalconnect.objects.resource;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.hackathon.hospitalconnect.objects.enums.ResourceStatus;
 import de.hackathon.hospitalconnect.objects.hospitals.User;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class PersonalResource {
     private DefaultPersonalResource defaultPersonalResource;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
 }

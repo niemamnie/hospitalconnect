@@ -1,5 +1,6 @@
 package de.hackathon.hospitalconnect.objects.hospitals;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +23,6 @@ public class Credentials {
     private String password;
 
     @OneToOne
+    @JsonIgnore
     private User user;
 }
