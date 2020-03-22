@@ -14,6 +14,6 @@ public class DefaultMaterialResource {
     @Column(nullable = false, unique = true, updatable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "defaultMaterialResource")
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, mappedBy = "defaultMaterialResource")
     private List<MaterialResource> materialResources;
 }

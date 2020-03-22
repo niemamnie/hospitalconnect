@@ -14,6 +14,6 @@ public class DefaultPersonalResource {
     @Column(nullable = false, unique = true, updatable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "defaultPersonalResource")
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, mappedBy = "defaultPersonalResource")
     private List<PersonalResource> personalResources;
 }
