@@ -12,6 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DefaultResources {
-    private List<PersonalResourceName> personalResourceNames;
+    private List<HumanResourceName> humanResourceNames;
     private List<MaterialResourceName> MaterialResourceNames;
 }

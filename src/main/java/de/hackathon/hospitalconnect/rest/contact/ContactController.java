@@ -1,47 +1,28 @@
 package de.hackathon.hospitalconnect.rest.contact;
 
+
 import de.hackathon.hospitalconnect.objects.user.Contact;
-import de.hackathon.hospitalconnect.objects.user.repositories.ContactRepository;
-import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
-@Component
+@RestController
 public class ContactController {
 
-    private final ContactRepository contactRepository;
+    private final ContactService contactService;
 
-
-    public ContactController(ContactRepository contactRepository) {
-        this.contactRepository = contactRepository;
+    public ContactController(ContactService contactService) {
+        this.contactService = contactService;
     }
 
-
-    public Contact getContact(Long id) {
-
-        Optional<Contact> anyContact = contactRepository.getById(id);
-        if (anyContact.isPresent()) {
-            return anyContact.get();
-        } else {
-            throw new InternException("Unable to find contact in database", HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/get/contact/{id}")
+    public ResponseEntity<Contact> getContact(@PathVariable Long id) {
+        return new ResponseEntity<>(contactService.getContact(id), HttpStatus.OK);
     }
 
-
-    public void updateContact(Long id, Contact contact) {
-        try {
-            if (!contact.getId().equals(id)) {
-                contact.setId(id);
-            }
-            Optional<Contact> anyContact = contactRepository.getById(id);
-            if (anyContact.isPresent()) {
-                contact.setUser(anyContact.get().getUser());
-            }
-            contactRepository.saveAndFlush(contact);
-        } catch (RuntimeException exception) {
-            throw new InternException("Unable to find contact in database", HttpStatus.NOT_FOUND);
-        }
+    @PatchMapping("/patch/contact/{id}")
+    public ResponseEntity patchContact(@PathVariable Long id, @RequestBody Contact contact) {
+        contactService.updateContact(id, contact);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

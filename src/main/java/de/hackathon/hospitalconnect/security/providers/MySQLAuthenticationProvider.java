@@ -21,6 +21,7 @@ public class MySQLAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     UserRepository userRepository;
 
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();

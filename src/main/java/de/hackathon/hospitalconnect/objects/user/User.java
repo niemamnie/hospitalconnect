@@ -1,9 +1,10 @@
 package de.hackathon.hospitalconnect.objects.user;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import de.hackathon.hospitalconnect.objects.enums.UserType;
+import de.hackathon.hospitalconnect.objects.resource.HumanResource;
 import de.hackathon.hospitalconnect.objects.resource.MaterialResource;
-import de.hackathon.hospitalconnect.objects.resource.PersonalResource;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,9 +19,10 @@ import java.util.List;
 @Table(name = "user")
 public class User {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(updatable = false, nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private Long id;
 
     @Enumerated(EnumType.ORDINAL)
@@ -30,10 +32,13 @@ public class User {
     private String name;
 
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonProperty(value = "credentials", access = JsonProperty.Access.WRITE_ONLY)
+    private Credentials credentials;
+
+
     private String verband;
 
-    @OneToOne(mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    private Credentials credentials;
 
     private String tel;
 
@@ -42,11 +47,9 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Address address;
-
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "user", fetch = FetchType.LAZY)
-    private List<PersonalResource> personal_resources;
-
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private List<HumanResource> human_resources;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<MaterialResource> material_resources;
 
     public void setAddress(Address address) {
@@ -64,11 +67,11 @@ public class User {
         this.contact = contact;
     }
 
-    public void setPersonal_resources(List<PersonalResource> personalResources) {
-        for (PersonalResource resource : personalResources) {
+    public void setHuman_resources(List<HumanResource> humanResources) {
+        for (HumanResource resource : humanResources) {
             resource.setUser(this);
         }
-        this.personal_resources = personalResources;
+        this.human_resources = humanResources;
     }
 
     public void setMaterial_resources(List<MaterialResource> materialResources) {

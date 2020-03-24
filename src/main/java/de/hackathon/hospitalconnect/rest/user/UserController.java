@@ -1,50 +1,35 @@
 package de.hackathon.hospitalconnect.rest.user;
 
+
 import de.hackathon.hospitalconnect.objects.user.User;
-import de.hackathon.hospitalconnect.objects.user.repositories.AddressRepository;
-import de.hackathon.hospitalconnect.objects.user.repositories.UserRepository;
-import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
-@Component
+@RestController
 public class UserController {
+    private final UserService userService;
 
-    private final UserRepository userRepository;
-    private final AddressRepository locationRepository;
-
-    public UserController(UserRepository userRepository, AddressRepository locationRepository) {
-        this.userRepository = userRepository;
-        this.locationRepository = locationRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    public Long saveNewHospital(User user) {
-        User saved = userRepository.saveAndFlush(user);
-        return saved.getId();
+    @GetMapping("get/user")
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity(userService.getUsers(), HttpStatus.OK);
     }
 
-    public User getUser(Long id) {
-        try {
-            Optional<User> anyHospital = userRepository.findById(id);
-            if (anyHospital.isPresent()) {
-                return anyHospital.get();
-            }
-        } catch (EntityNotFoundException e) {
-            throw new InternException("Could not Found", HttpStatus.NOT_FOUND);
-        }
-        throw new InternException("Could not Found", HttpStatus.NOT_FOUND);
+
+    @PostMapping("post/user")
+    public ResponseEntity saveNewHospital(@RequestBody User user) {
+        Long id = userService.saveNewUser(user);
+        return new ResponseEntity("/user/" + id.toString(), HttpStatus.CREATED);
     }
 
-    public List<User> getUsers() {
-        List<User> users = userRepository.findAll();
-        for (User userItem : users) {
-            userItem.getPersonal_resources().size();
-            userItem.getMaterial_resources().size();
-        }
-        return users;
+    @GetMapping("get/user/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 }

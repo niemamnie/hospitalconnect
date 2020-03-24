@@ -11,20 +11,21 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "personal_resource")
-public class PersonalResource {
+@Table(name = "human_resource")
+public class HumanResource {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(updatable = false, nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private Long id;
 
-    private String name;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private HumanResourceName name;
 
     @Enumerated(EnumType.ORDINAL)
     private ResourceStatus status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private User user;
 

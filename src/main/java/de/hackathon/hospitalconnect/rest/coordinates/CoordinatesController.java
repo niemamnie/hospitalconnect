@@ -2,45 +2,28 @@ package de.hackathon.hospitalconnect.rest.coordinates;
 
 
 import de.hackathon.hospitalconnect.objects.user.Coordinates;
-import de.hackathon.hospitalconnect.objects.user.repositories.CoordinatesRepository;
-import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
-@Component
+@RestController
 public class CoordinatesController {
 
+    private final CoordinatesService coordinatesService;
 
-    private final CoordinatesRepository coordinatesRepository;
 
-    public CoordinatesController(CoordinatesRepository coordinatesRepository) {
-        this.coordinatesRepository = coordinatesRepository;
+    public CoordinatesController(CoordinatesService coordinatesService) {
+        this.coordinatesService = coordinatesService;
     }
 
-
-    public Coordinates getCoordinates(Long id) {
-        Optional<Coordinates> anyCoordinates = coordinatesRepository.getById(id);
-        if (anyCoordinates.isPresent()) {
-            return anyCoordinates.get();
-        } else {
-            throw new InternException("Unable to find coordinates in database", HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/get/coordinates/{id}")
+    public ResponseEntity<Coordinates> getCoordinates(@PathVariable Long id) {
+        return new ResponseEntity<>(coordinatesService.getCoordinates(id), HttpStatus.OK);
     }
 
-    public void updateCoordinates(Long id, Coordinates coordinates) {
-        try {
-            if (!coordinates.getId().equals(id)) {
-                coordinates.setId(id);
-            }
-            Optional<Coordinates> anyCoordinates = coordinatesRepository.getById(id);
-            if (anyCoordinates.isPresent()) {
-                coordinates.setAddress(anyCoordinates.get().getAddress());
-            }
-            coordinatesRepository.saveAndFlush(coordinates);
-        } catch (RuntimeException exception) {
-            throw new InternException("Unable to find coordinates in database", HttpStatus.NOT_FOUND);
-        }
+    @PatchMapping("patch/coordinates/{id}")
+    public ResponseEntity patchCoordinates(@PathVariable Long id, @RequestBody Coordinates coordinates) {
+        coordinatesService.updateCoordinates(id, coordinates);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

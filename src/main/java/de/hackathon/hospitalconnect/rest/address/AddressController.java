@@ -1,45 +1,27 @@
 package de.hackathon.hospitalconnect.rest.address;
 
-
 import de.hackathon.hospitalconnect.objects.user.Address;
-import de.hackathon.hospitalconnect.objects.user.repositories.AddressRepository;
-import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
-@Component
+@RestController
 public class AddressController {
 
-    private final AddressRepository addressRepository;
+    private final AddressService addressService;
 
-    public AddressController(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
     }
 
-    public Address getAddress(Long id) {
-        Optional<Address> address = addressRepository.getById(id);
-        if (address.isPresent()) {
-            return address.get();
-        } else {
-            throw new InternException("Unable to find address in database", HttpStatus.NOT_FOUND);
-        }
-
+    @GetMapping("/get/address/{id}")
+    public ResponseEntity<Address> getAddress(@PathVariable Long id) {
+        return new ResponseEntity<>(addressService.getAddress(id), HttpStatus.OK);
     }
 
-    public void patchAddress(Long id, Address address) {
-        try {
-            if (!id.equals(address.getId())) {
-                address.setId(id);
-            }
-            Optional<Address> anyAddress = addressRepository.getById(id);
-            if (anyAddress.isPresent()) {
-                address.setUser(anyAddress.get().getUser());
-            }
-            addressRepository.saveAndFlush(address);
-        } catch (RuntimeException exception) {
-            throw new InternException("Unable to find address in database", HttpStatus.NOT_FOUND);
-        }
+    @PatchMapping("/patch/address/{id}")
+    public ResponseEntity patchAddress(@PathVariable Long id, @RequestBody Address address) {
+        addressService.patchAddress(id, address);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
