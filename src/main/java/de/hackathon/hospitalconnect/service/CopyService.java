@@ -15,6 +15,8 @@ public class CopyService {
         mapper.classMap(source.getClass(), target.getClass())
                 .mapNulls(false)
                 .exclude("id")
+                .exclude("humanResources")
+                .exclude("materialResources")
                 .byDefault()
                 .register();
         MapperFacade mapperFacade = mapper.getMapperFacade();

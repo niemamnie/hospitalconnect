@@ -1,8 +1,8 @@
 package de.hackathon.hospitalconnect.rest.coordinates;
 
 
-import de.hackathon.hospitalconnect.objects.user.Coordinates;
-import de.hackathon.hospitalconnect.objects.user.repositories.CoordinatesRepository;
+import de.hackathon.hospitalconnect.model.user.Coordinates;
+import de.hackathon.hospitalconnect.model.user.repositories.CoordinatesRepository;
 import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

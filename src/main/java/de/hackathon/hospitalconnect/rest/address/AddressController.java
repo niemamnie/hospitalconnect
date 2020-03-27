@@ -1,6 +1,6 @@
 package de.hackathon.hospitalconnect.rest.address;
 
-import de.hackathon.hospitalconnect.objects.user.Address;
+import de.hackathon.hospitalconnect.model.user.Address;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,0 +1,919 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/get/address/{id}": {
+      "get": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "getAddress",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patch/address/{id}": {
+      "patch": {
+        "tags": [
+          "address-controller"
+        ],
+        "operationId": "patchAddress",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Address"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patch/contact/{id}": {
+      "patch": {
+        "tags": [
+          "contact-controller"
+        ],
+        "operationId": "patchContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contact"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/contact/{id}": {
+      "get": {
+        "tags": [
+          "contact-controller"
+        ],
+        "operationId": "getContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/coordinates/{id}": {
+      "get": {
+        "tags": [
+          "coordinates-controller"
+        ],
+        "operationId": "getCoordinates",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Coordinates"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patch/coordinates/{id}": {
+      "patch": {
+        "tags": [
+          "coordinates-controller"
+        ],
+        "operationId": "patchCoordinates",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Coordinates"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "login-cntroller"
+        ],
+        "operationId": "login",
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/post/human/resource/{id}": {
+      "post": {
+        "tags": [
+          "human-resources-controller"
+        ],
+        "operationId": "updateHumanResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HumanResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/get/human/resource/{id}": {
+      "get": {
+        "tags": [
+          "human-resources-controller"
+        ],
+        "operationId": "getHumanResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanResource"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/material/resource/{id}": {
+      "get": {
+        "tags": [
+          "material-resources-controller"
+        ],
+        "operationId": "getMaterialResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialResource"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post/material/resource/{id}": {
+      "post": {
+        "tags": [
+          "material-resources-controller"
+        ],
+        "operationId": "updateMaterialResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/settings/resource/post/material": {
+      "post": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "createNewDefaultMaterialResource",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialResourceType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settings/resource/post/human": {
+      "post": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "createNewDefaultPersonResource",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HumanResourceType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settings/resource/delete/material": {
+      "delete": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "deleteMaterialResourceType",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/settings/resource/get/material/{id}": {
+      "get": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "getDefaultMaterialResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialResourceType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settings/resource": {
+      "get": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "getDefaultResources",
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DefaultResources"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settings/resource/get/human/{id}": {
+      "get": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "getDefaultPersonalResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanResourceType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settings/resource/patch/human/{id}": {
+      "patch": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "patchDefaultHumanResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HumanResourceType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/settings/resource/delete/human/{id}": {
+      "delete": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "deleteHumanType",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/get/user/{id}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post/user": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "saveNewHospital",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patch/user/{id}": {
+      "patch": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "patchUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/get/user": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "postalcode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "city": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/Coordinates"
+          }
+        }
+      },
+      "Coordinates": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "tel": {
+            "type": "string"
+          }
+        }
+      },
+      "HumanResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "humanType": {
+            "$ref": "#/components/schemas/HumanResourceType"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "GREEN",
+              "YELLOW",
+              "RED"
+            ]
+          }
+        }
+      },
+      "HumanResourceType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "humanName": {
+            "type": "string"
+          }
+        }
+      },
+      "MaterialResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "materialType": {
+            "$ref": "#/components/schemas/MaterialResourceType"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "GREEN",
+              "YELLOW",
+              "RED"
+            ]
+          }
+        }
+      },
+      "MaterialResourceType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "materialName": {
+            "type": "string"
+          }
+        }
+      },
+      "DefaultResources": {
+        "type": "object",
+        "properties": {
+          "humanResourceTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HumanResourceType"
+            }
+          },
+          "materialResourceTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MaterialResourceType"
+            }
+          }
+        }
+      },
+      "Credentials": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "PRIVATE_PERSON",
+              "HOSPITAL"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/Credentials"
+          },
+          "verband": {
+            "type": "string"
+          },
+          "tel": {
+            "type": "string"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/Contact"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "humanResources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HumanResource"
+            }
+          },
+          "materialResources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MaterialResource"
+            }
+          },
+          "roles": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "USER",
+                "ADMIN"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

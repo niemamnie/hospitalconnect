@@ -1,7 +1,7 @@
 package de.hackathon.hospitalconnect.rest.contact;
 
 
-import de.hackathon.hospitalconnect.objects.user.Contact;
+import de.hackathon.hospitalconnect.model.user.Contact;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

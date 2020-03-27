@@ -1,7 +1,7 @@
 package de.hackathon.hospitalconnect.rest.contact;
 
-import de.hackathon.hospitalconnect.objects.user.Contact;
-import de.hackathon.hospitalconnect.objects.user.repositories.ContactRepository;
+import de.hackathon.hospitalconnect.model.user.Contact;
+import de.hackathon.hospitalconnect.model.user.repositories.ContactRepository;
 import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
