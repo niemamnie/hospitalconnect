@@ -38,4 +38,10 @@ public class UserController {
     public void patchUser(@PathVariable Long id, @RequestBody User userWichChanges) {
         userService.patchUser(id, userWichChanges);
     }
+
+    @PatchMapping("/settings/admin/set/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void setAdmin(@PathVariable Long id) {
+        userService.setAdmin(id);
+    }
 }

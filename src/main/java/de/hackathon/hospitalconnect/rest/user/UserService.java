@@ -1,6 +1,7 @@
 package de.hackathon.hospitalconnect.rest.user;
 
 import de.hackathon.hospitalconnect.exceptions.InternException;
+import de.hackathon.hospitalconnect.exceptions.intern.NotFoundException;
 import de.hackathon.hospitalconnect.model.resource.HumanResource;
 import de.hackathon.hospitalconnect.model.resource.HumanResourceType;
 import de.hackathon.hospitalconnect.model.resource.MaterialResource;
@@ -108,5 +109,16 @@ public class UserService {
                 .orElseThrow(() -> new InternException(
                         "User not Found", HttpStatus.NOT_FOUND));
         copyService.map(userWithChanges, savedUser);
+    }
+
+    public void setAdmin(Long id) {
+        User user = userRepository.getById(id)
+                .orElseThrow(() -> new NotFoundException("User"));
+        List<Role> roles = user.getRoles();
+        if (!roles.contains(Role.ADMIN)) {
+            roles.add(Role.ADMIN);
+        } else {
+            throw new InternException("User is Alredy Admin", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
