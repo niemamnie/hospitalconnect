@@ -1,6 +1,7 @@
 package de.hackathon.hospitalconnect.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.hackathon.hospitalconnect.converters.CustomAttrubuteConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +19,9 @@ public class Credentials {
     private Long id;
 
     @Column(unique = true)
+    @Convert(converter = CustomAttrubuteConverter.class)
     private String email;
+
 
     private String password;
 

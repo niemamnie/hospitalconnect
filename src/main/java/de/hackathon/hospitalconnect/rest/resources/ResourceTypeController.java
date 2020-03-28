@@ -55,8 +55,8 @@ public class ResourceTypeController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/material")
-    public void deleteMaterialResourceType(Long id) {
+    @DeleteMapping("/delete/material/{id}")
+    public void deleteMaterialResourceType(@PathVariable Long id) {
         drController.deleteMaterialResourceType(id);
     }
 }

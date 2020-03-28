@@ -1,6 +1,7 @@
 package de.hackathon.hospitalconnect.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.hackathon.hospitalconnect.converters.CustomAttrubuteConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,10 +19,11 @@ public class Address {
     @Column(updatable = false, nullable = false, unique = true)
     private Long id;
 
-
-    private int postalcode;
-
+    @Convert(converter = CustomAttrubuteConverter.class)
+    private String postalcode;
+    @Convert(converter = CustomAttrubuteConverter.class)
     private String city;
+    @Convert(converter = CustomAttrubuteConverter.class)
     private String street;
 
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -1,16 +1,18 @@
 package de.hackathon.hospitalconnect.rest.user;
 
+import de.hackathon.hospitalconnect.exceptions.InternException;
 import de.hackathon.hospitalconnect.model.resource.HumanResource;
 import de.hackathon.hospitalconnect.model.resource.HumanResourceType;
 import de.hackathon.hospitalconnect.model.resource.MaterialResource;
 import de.hackathon.hospitalconnect.model.resource.MaterialResourceType;
 import de.hackathon.hospitalconnect.model.resource.repositories.HumanResourceTypeRepository;
 import de.hackathon.hospitalconnect.model.resource.repositories.MaterialResourceTypeRepository;
+import de.hackathon.hospitalconnect.model.user.Credentials;
 import de.hackathon.hospitalconnect.model.user.Role;
 import de.hackathon.hospitalconnect.model.user.User;
 import de.hackathon.hospitalconnect.model.user.repositories.UserRepository;
-import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import de.hackathon.hospitalconnect.service.CopyService;
+import de.hackathon.hospitalconnect.service.PasswordEncryptionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -26,14 +28,16 @@ public class UserService {
     private final HumanResourceTypeRepository humanResourceTypeRepository;
     private final MaterialResourceTypeRepository materialResourceTypeRepository;
     private final CopyService copyService;
+    private final PasswordEncryptionService passwordEncodeService;
     private boolean isFirstUser = false;
 
-    public UserService(UserRepository userRepository, HumanResourceTypeRepository humanResourceTypeRepository, MaterialResourceTypeRepository materialResourceTypeRepository, CopyService copyService) {
+    public UserService(UserRepository userRepository, HumanResourceTypeRepository humanResourceTypeRepository, MaterialResourceTypeRepository materialResourceTypeRepository, CopyService copyService, PasswordEncryptionService passwordEncodeService) {
         this.userRepository = userRepository;
         isFirstUser = userRepository.count() <= 0;
         this.humanResourceTypeRepository = humanResourceTypeRepository;
         this.materialResourceTypeRepository = materialResourceTypeRepository;
         this.copyService = copyService;
+        this.passwordEncodeService = passwordEncodeService;
     }
 
     public Long saveNewUser(User user) {
@@ -43,6 +47,8 @@ public class UserService {
             user.addRole(Role.ADMIN);
         }
         user.addRole(Role.USER);
+        Credentials userCredentials = user.getCredentials();
+        userCredentials.setPassword(passwordEncodeService.encrypt(userCredentials.getPassword()));
         User saved = userRepository.saveAndFlush(user);
         return saved.getId();
     }

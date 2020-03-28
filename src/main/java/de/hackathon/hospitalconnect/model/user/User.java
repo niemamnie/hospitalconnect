@@ -2,6 +2,7 @@ package de.hackathon.hospitalconnect.model.user;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.hackathon.hospitalconnect.converters.CustomAttrubuteConverter;
 import de.hackathon.hospitalconnect.model.enums.UserType;
 import de.hackathon.hospitalconnect.model.resource.HumanResource;
 import de.hackathon.hospitalconnect.model.resource.MaterialResource;
@@ -30,6 +31,7 @@ public class User {
     private UserType type;
 
     @Column
+    @Convert(converter = CustomAttrubuteConverter.class)
     private String name;
 
 
@@ -45,7 +47,7 @@ public class User {
 
     private String verband;
 
-
+    @Convert(converter = CustomAttrubuteConverter.class)
     private String tel;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

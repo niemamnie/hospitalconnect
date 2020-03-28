@@ -26,7 +26,7 @@ class UserRepositoryTest {
         List<HumanResource> humanResources = new ArrayList<>();
         HumanResource resource = new HumanResource();
 
-        resource.setStatus(ResourceStatus.RED);
+        resource.setStatus(ResourceStatus.NEED);
         humanResources.add(resource);
         user.setHumanResources(humanResources);
 

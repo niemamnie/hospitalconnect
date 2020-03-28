@@ -1,5 +1,6 @@
 package de.hackathon.hospitalconnect.security.config;
 
+import de.hackathon.hospitalconnect.model.user.Role;
 import de.hackathon.hospitalconnect.security.providers.MySQLAuthenticationProvider;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and().authorizeRequests().antMatchers("/post/user").permitAll()
                 .and().authorizeRequests().antMatchers("/v3/**").permitAll()
+                .and().authorizeRequests().antMatchers("/settings/**").hasAuthority(Role.ADMIN.toString())
                 .and().authorizeRequests().antMatchers("/**").authenticated();
     }
 

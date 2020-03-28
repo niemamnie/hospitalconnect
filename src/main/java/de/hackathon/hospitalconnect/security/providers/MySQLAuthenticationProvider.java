@@ -1,8 +1,10 @@
 package de.hackathon.hospitalconnect.security.providers;
 
+import de.hackathon.hospitalconnect.exceptions.intern.NotFoundException;
 import de.hackathon.hospitalconnect.model.user.User;
 import de.hackathon.hospitalconnect.model.user.repositories.UserRepository;
 import de.hackathon.hospitalconnect.security.exceptions.InvalidCredentialsException;
+import de.hackathon.hospitalconnect.service.PasswordEncryptionService;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,9 +21,11 @@ import java.util.List;
 public class MySQLAuthenticationProvider implements AuthenticationProvider {
 
     private final UserRepository userRepository;
+    private final PasswordEncryptionService passwordEncryptionService;
 
-    public MySQLAuthenticationProvider(UserRepository userRepository) {
+    public MySQLAuthenticationProvider(UserRepository userRepository, PasswordEncryptionService passwordEncryptionService) {
         this.userRepository = userRepository;
+        this.passwordEncryptionService = passwordEncryptionService;
     }
 
 
@@ -31,15 +35,20 @@ public class MySQLAuthenticationProvider implements AuthenticationProvider {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        User foundUser = userRepository.getByCredentials_EmailAndCredentials_Password(email, password)
-                .orElseThrow(InvalidCredentialsException::new);
 
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        foundUser.getRoles().size();
-        foundUser.getRoles().forEach(role -> {
-            authorityList.add(new SimpleGrantedAuthority(role.toString()));
-        });
-        return new UsernamePasswordAuthenticationToken(email, password, authorityList);
+        User foundUser = userRepository.findByCredentials_Email(email)
+                .orElseThrow(() ->
+                        new NotFoundException("Email"));
+        if (passwordEncryptionService.match(password, foundUser.getCredentials().getPassword())) {
+            List<GrantedAuthority> authorityList = new ArrayList<>();
+            foundUser.getRoles().size();
+            foundUser.getRoles().forEach(role -> {
+                authorityList.add(new SimpleGrantedAuthority(role.toString()));
+            });
+            return new UsernamePasswordAuthenticationToken(email, password, authorityList);
+        } else {
+            throw new InvalidCredentialsException();
+        }
     }
 
     @Override

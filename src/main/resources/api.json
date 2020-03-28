@@ -82,6 +82,37 @@
         }
       }
     },
+    "/get/contact/{id}": {
+      "get": {
+        "tags": [
+          "contact-controller"
+        ],
+        "operationId": "getContact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/patch/contact/{id}": {
       "patch": {
         "tags": [
@@ -115,37 +146,6 @@
               "*/*": {
                 "schema": {
                   "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/get/contact/{id}": {
-      "get": {
-        "tags": [
-          "contact-controller"
-        ],
-        "operationId": "getContact",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "default response",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contact"
                 }
               }
             }
@@ -237,6 +237,37 @@
         }
       }
     },
+    "/get/human/resource/{id}": {
+      "get": {
+        "tags": [
+          "human-resources-controller"
+        ],
+        "operationId": "getHumanResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanResource"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/post/human/resource/{id}": {
       "post": {
         "tags": [
@@ -266,37 +297,6 @@
         "responses": {
           "204": {
             "description": "default response"
-          }
-        }
-      }
-    },
-    "/get/human/resource/{id}": {
-      "get": {
-        "tags": [
-          "human-resources-controller"
-        ],
-        "operationId": "getHumanResource",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "default response",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/HumanResource"
-                }
-              }
-            }
           }
         }
       }
@@ -365,28 +365,43 @@
         }
       }
     },
-    "/settings/resource/post/material": {
-      "post": {
+    "/settings/resource/delete/human/{id}": {
+      "delete": {
         "tags": [
           "resource-type-controller"
         ],
-        "operationId": "createNewDefaultMaterialResource",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MaterialResourceType"
-              }
+        "operationId": "deleteHumanType",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           }
-        },
+        ],
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/settings/resource": {
+      "get": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "getDefaultResources",
         "responses": {
           "200": {
             "description": "default response",
             "content": {
               "*/*": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/DefaultResources"
                 }
               }
             }
@@ -416,111 +431,6 @@
               "*/*": {
                 "schema": {
                   "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/settings/resource/delete/material": {
-      "delete": {
-        "tags": [
-          "resource-type-controller"
-        ],
-        "operationId": "deleteMaterialResourceType",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "default response"
-          }
-        }
-      }
-    },
-    "/settings/resource/get/material/{id}": {
-      "get": {
-        "tags": [
-          "resource-type-controller"
-        ],
-        "operationId": "getDefaultMaterialResource",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "default response",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/MaterialResourceType"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/settings/resource": {
-      "get": {
-        "tags": [
-          "resource-type-controller"
-        ],
-        "operationId": "getDefaultResources",
-        "responses": {
-          "200": {
-            "description": "default response",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/DefaultResources"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/settings/resource/get/human/{id}": {
-      "get": {
-        "tags": [
-          "resource-type-controller"
-        ],
-        "operationId": "getDefaultPersonalResource",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "default response",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/HumanResourceType"
                 }
               }
             }
@@ -561,12 +471,103 @@
         }
       }
     },
-    "/settings/resource/delete/human/{id}": {
+    "/settings/resource/get/material/{id}": {
+      "get": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "getDefaultMaterialResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialResourceType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settings/resource/get/human/{id}": {
+      "get": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "getDefaultPersonalResource",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanResourceType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settings/resource/post/material": {
+      "post": {
+        "tags": [
+          "resource-type-controller"
+        ],
+        "operationId": "createNewDefaultMaterialResource",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialResourceType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/settings/resource/delete/material/{id}": {
       "delete": {
         "tags": [
           "resource-type-controller"
         ],
-        "operationId": "deleteHumanType",
+        "operationId": "deleteMaterialResourceType",
         "parameters": [
           {
             "name": "id",
@@ -581,6 +582,49 @@
         "responses": {
           "200": {
             "description": "default response"
+          }
+        }
+      }
+    },
+    "/post/hospital/search/{radiusInKm}": {
+      "post": {
+        "tags": [
+          "search-for-hospitals-controller"
+        ],
+        "operationId": "searchForHospitalsInRadius",
+        "parameters": [
+          {
+            "name": "radiusInKm",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Coordinates"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -645,6 +689,29 @@
         }
       }
     },
+    "/get/user": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/patch/user/{id}": {
       "patch": {
         "tags": [
@@ -677,29 +744,6 @@
           }
         }
       }
-    },
-    "/get/user": {
-      "get": {
-        "tags": [
-          "user-controller"
-        ],
-        "operationId": "getUsers",
-        "responses": {
-          "200": {
-            "description": "default response",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -712,8 +756,7 @@
             "format": "int64"
           },
           "postalcode": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           },
           "city": {
             "type": "string"

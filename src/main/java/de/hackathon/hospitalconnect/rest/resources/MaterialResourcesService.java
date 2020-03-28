@@ -1,8 +1,8 @@
 package de.hackathon.hospitalconnect.rest.resources;
 
+import de.hackathon.hospitalconnect.exceptions.InternException;
 import de.hackathon.hospitalconnect.model.resource.MaterialResource;
 import de.hackathon.hospitalconnect.model.resource.repositories.MaterialResourceRepository;
-import de.hackathon.hospitalconnect.rest.exceptions.InternException;
 import de.hackathon.hospitalconnect.service.CopyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
